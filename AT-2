@@ -1,0 +1,88 @@
+#AT-2 PROJECT
+#task case id -01
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Set the path to your chromedriver executable
+chromedriver_path = r"C:\Users\ajay\OneDrive\Desktop\chromedriver.exe"
+
+# Create Chrome options
+chrome_options = Options()
+chrome_options.add_experimental_option("detach", True)
+
+# Initialize the WebDriver
+driver = webdriver.Chrome(options=chrome_options)
+
+
+# Open the OrangeHRM login page
+driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+
+
+# Set an explicit wait for the forgot password link
+wait = WebDriverWait(driver, 30)
+forgot_password = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[4]/p')))
+forgot_password.click()
+
+# Enter the username
+username_input = wait.until(EC.visibility_of_element_located((By.NAME, "username")))
+username_input.send_keys("Ajay")
+
+# Click on reset password
+reset_password = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app"]/div[1]/div[1]/div/form/div[2]/button[2]')))
+reset_password.click()
+
+
+# Close the browser
+driver.quit()
+
+#task case id-02
+import os
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Define reusable function to find header elements by name
+def find_header(driver, header_name):
+    return wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[1]/a/div[2]/img'"{orangeHRM}")))
+
+# Set environment variable for chromedriver path (if applicable)
+# chromedriver_path = os.environ.get("CHROMEDRIVER_PATH")
+
+# Create Chrome options (consider removing detach=True if not needed)
+chrome_options = Options()
+# chrome_options.add_experimental_option("detach", True)
+
+# Initialize the WebDriver
+driver = webdriver.Chrome(options=chrome_options)
+
+# Open the OrangeHRM login page
+driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+
+# Set an explicit wait of 5 seconds (adjust as needed)
+wait = WebDriverWait(driver, 5)
+
+# Login functions
+# Enter the username
+username_input = wait.until(EC.visibility_of_element_located((By.NAME, "username")))
+username_input.send_keys("Admin")
+
+# Enter the password
+password_input = wait.until(EC.visibility_of_element_located((By.NAME, "password")))
+password_input.send_keys("admin123")
+
+# Click on admin button
+admin_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[1]/a/span')))
+admin_button.click()
+
+# Validate page title
+actual_title = driver.title
+expected_title = "OrangeHRM"
+if actual_title == expected_title:
+  print("sucessful")
